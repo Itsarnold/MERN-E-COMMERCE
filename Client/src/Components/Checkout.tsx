@@ -1,9 +1,14 @@
 import { useCart } from "../CartContext";
-import swal from 'sweetalert2'
+import swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 const Checkout = () => {
-  const { cartItems } = useCart();
+  const [count, setCount] = useState(0);
+  const { cartItems, setCartItems } = useCart();
 
+  const removeItem = () => {
+    setCartItems(prev) => prev
+  }
   const subtotal = cartItems.reduce((sum, item) => {
     const price = Number(item.price) || 0;
     const quantity = Number(item.quantity) || 1;
@@ -19,8 +24,7 @@ const Checkout = () => {
       text: "You cannot afford this kind of money bro.",
       icon: "warning",
       confirmButtonText: "Accept it",
-
-    }) 
+    });
   };
 
   if (cartItems.length === 0) {
@@ -28,8 +32,12 @@ const Checkout = () => {
       <div className="min-h-screen p-6 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
-          <p className="text-gray-600 mb-2">Add some items to your cart before checkout</p>
-          <Link className="bg-amber-300 rounded p-2 mt-2" to="/products">Goto Shop</Link>
+          <p className="text-gray-600 mb-2">
+            Add some items to your cart before checkout
+          </p>
+          <Link className="bg-amber-300 rounded p-2 mt-2" to="/products">
+            Goto Shop
+          </Link>
         </div>
       </div>
     );
@@ -39,37 +47,52 @@ const Checkout = () => {
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Checkout</h1>
-        
+
         <div className="grid md:grid-cols-3 gap-6">
-   
           <div className="md:col-span-2">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold mb-4">Order Items</h2>
               <div className="space-y-4">
                 {cartItems.map((item) => (
-                  <div key={item._id} className="flex items-center gap-4 border-b pb-4">
-                    <img 
-                      src={item.image} 
-                      alt={item.name} 
-                      className="w-20 h-20 object-cover rounded"
-                    />
-                    <div className="flex-1">
-                      <p className="font-semibold">{item.name}</p>
-                      <p className="text-gray-600 text-sm">Quantity: {item.quantity || 1}</p>
-                      <p className="text-amber-600 font-bold">
-                        ${(Number(item.price) * (Number(item.quantity) || 1)).toFixed(2)}
-                      </p>
+                  <>
+                    
+                    <div
+                      key={item._id}
+                      className="flex items-center gap-4 border-b pb-4"
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-20 h-20 object-cover rounded"
+                      />
+                      <div className="flex-1">
+                        <p className="font-semibold">{item.name}</p>
+                        <p className="text-gray-600 text-sm">
+                          Quantity: <span className="text-2xl">-</span> {count}{" "}
+                          <span>+</span>
+                        </p>
+                        <p className="text-amber-600 font-bold">
+                          $
+                          {(
+                            Number(item.price) * (Number(item.quantity) || 1)
+                          ).toFixed(2)}
+                        </p>
+                      </div>
+                                          <button onClick={() => removeItem(item._id)} className="bg-red-700 p-1 cursor-pointer rounded text-white hover:bg-red-600"> 
+                      Remove
+                    </button>
                     </div>
-                  </div>
+
+                  </>
                 ))}
               </div>
             </div>
           </div>
- 
+
           <div className="md:col-span-1">
             <div className="bg-white rounded-lg shadow-md p-6 sticky top-24">
               <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-              
+
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal</span>
@@ -77,7 +100,9 @@ const Checkout = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Shipping</span>
-                  <span className="font-semibold">${shippingCost.toFixed(2)}</span>
+                  <span className="font-semibold">
+                    ${shippingCost.toFixed(2)}
+                  </span>
                 </div>
                 <div className="border-t pt-2 mt-2">
                   <div className="flex justify-between font-bold text-lg">
@@ -87,8 +112,8 @@ const Checkout = () => {
                 </div>
               </div>
 
-              <button 
-                onClick={handlePayment} 
+              <button
+                onClick={handlePayment}
                 className="w-full cursor-pointer bg-amber-600 text-white py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors"
               >
                 Proceed to Payment
