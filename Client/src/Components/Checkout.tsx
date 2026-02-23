@@ -3,11 +3,11 @@ import swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 const Checkout = () => {
-  const [count, setCount] = useState(0);
+  const [count] = useState(0);
   const { cartItems, setCartItems } = useCart();
 
-  const removeItem = () => {
-    setCartItems(prev) => prev
+  const removeItem = (id: string) => {
+    setCartItems((prev) => prev.filter((item) => item._id !== id))
   }
   const subtotal = cartItems.reduce((sum, item) => {
     const price = Number(item.price) || 0;
