@@ -1,7 +1,10 @@
+import { useState } from "react"
 
 const Categories = () => {
+    const [activeTab, setActiveTab] = useState('All')
 
     const tabs = [
+        { id: "0", label: "All"},
         { id: "1", label: "Fashion", },
         { id: "2", label: "Electronics", },
         { id: "3", label: "Textile", },
@@ -18,7 +21,9 @@ const Categories = () => {
                 <div
                  className="flex justify-center items-center"
                  key={tab.id}>
-                    <button className="cursor-pointer border rounded-xl p-3 font-medium border-amber-400 px-3 bg-[#3fcb96] hover:bg-[#2de09c]">
+                    <button 
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`cursor-pointer border rounded-xl p-3 font-medium border-amber-400 px-3  hover:bg-[#2de09c] ${activeTab === tab.id ? "bg-blue-600 hover:bg-blue-500" : "bg-[#3fcb96]"}`}>
                         {tab.label}
                     </button>
                 </div>

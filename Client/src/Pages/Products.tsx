@@ -43,7 +43,7 @@ const AllProducts = () => {
 
   if(loading) {
     return(
-      <div className="flex justify-center items-center text-white"><Loader2 className="h-15 w-15 animate-spin" /> <br /> LODING...</div>
+      <div className="flex justify-center items-center min-h-screen text-white"><Loader2 className="h-15 w-15 animate-spin" /> <br /> LODING...</div>
     )
   }
 
