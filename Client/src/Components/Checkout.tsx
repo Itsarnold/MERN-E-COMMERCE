@@ -1,5 +1,6 @@
 import { useCart } from "../CartContext";
-
+import swal from 'sweetalert2'
+import { Link } from "react-router-dom";
 const Checkout = () => {
   const { cartItems } = useCart();
 
@@ -13,8 +14,13 @@ const Checkout = () => {
   const total = subtotal + shippingCost;
 
   const handlePayment = () => {
-    alert('Hold on, No rush');
-   
+    swal.fire({
+      title: "Hold! No rush",
+      text: "You cannot afford this kind of money bro.",
+      icon: "warning",
+      confirmButtonText: "Accept it",
+
+    }) 
   };
 
   if (cartItems.length === 0) {
@@ -22,7 +28,8 @@ const Checkout = () => {
       <div className="min-h-screen p-6 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
-          <p className="text-gray-600">Add some items to your cart before checkout</p>
+          <p className="text-gray-600 mb-2">Add some items to your cart before checkout</p>
+          <Link className="bg-amber-300 rounded p-2 mt-2" to="/products">Goto Shop</Link>
         </div>
       </div>
     );

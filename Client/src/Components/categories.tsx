@@ -23,7 +23,7 @@ const Categories = () => {
                  key={tab.id}>
                     <button 
                     onClick={() => setActiveTab(tab.id)}
-                    className={`cursor-pointer border rounded-xl p-3 font-medium border-amber-400 px-3  hover:bg-[#2de09c] ${activeTab === tab.id ? "bg-blue-600 hover:bg-blue-500" : "bg-[#3fcb96]"}`}>
+                    className={`cursor-pointer border rounded-xl p-3 font-medium border-gray-400 px-3  hover:bg-[#2de09c] ${activeTab === tab.id ? "bg-blue-600 text-white hover:bg-blue-500" : "bg-[#3fcb96]"}`}>
                         {tab.label}
                     </button>
                 </div>
