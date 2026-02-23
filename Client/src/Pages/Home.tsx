@@ -64,7 +64,7 @@ const Home = () => {
             <img
               src="/pexels-apples-1841132_1920.jpg"
               alt="selling"
-              className="w-full max-w-md h-[400px] object-cover rounded-[2rem] shadow-2xl border-8 border-white/10 transition-transform duration-500 group-hover:scale-105"
+              className="w-full max-w-md h-[400px] object-cover rounded-[2rem] shadow-2xl border-8 border-white/10  "
             />
 
             <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-yellow-300/20 rounded-full blur-2xl -z-10"></div>
