@@ -3,6 +3,7 @@ import type { Product } from "../Types/Product";
 import axios from "axios";
 import useSound from "use-sound";
 import { useCart } from "../CartContext";
+import Categories from "../Components/categories";
 
 const AllProducts = () => {
     const { setCartCount, searchItem, setCartItems } = useCart();
@@ -34,6 +35,7 @@ const AllProducts = () => {
   
   return (
     <div className="p-3">
+        <Categories />
         <div className="w-full max-w-7xl">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {filteredItems.map((product) => (
